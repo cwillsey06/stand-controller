@@ -10,6 +10,7 @@ local Trove = require(Packages.trove)
 local Knit = require(Packages.knit)
 
 local Modules = common.Modules
+local RaycastHitbox = require(Modules.RaycastHitboxV4)
 local LoadAnimation = require(Modules.loadanimation)
 local Tween = require(Modules.tween)
 local new = require(Modules.new)
@@ -22,12 +23,22 @@ local StandService = Knit.CreateService {
 
 -- Server
 
+function StandService.Attack(player: Player, attackType: string)
+    if attackType == "Attack1" then
+        print('attack1')
+    end
+end
+
 function StandService.GetStand(desiredStand: string): Model?
     local Stands = game.ServerStorage.private.Assets.Stands
     return (Stands:FindFirstChild(desiredStand or "Default") or Stands.Default):Clone()
 end
 
 -- Client
+
+function StandService.Client.Attack(_, player: Player, attackType: string)
+    return StandService.Attack(player, attackType)
+end
 
 function StandService.Client.SetStand(_, player: Player, desiredStand: string)
     local stand = StandService.GetStand(desiredStand)
