@@ -3,6 +3,15 @@
   "tree": {
     "$className": "DataModel",
 
+    "Workspace": {
+      "$className": "Workspace",
+      "$ignoreUnknownInstances": true,
+      
+      "PlayerStands": {
+        "$className": "Folder"
+      }
+    },
+
     "ReplicatedStorage": {
       "common": {
         "$path": "src/common",
@@ -10,13 +19,6 @@
 
         "Packages": {
           "$path": "Packages"
-        },
-        
-        "StandService": {
-          "$path": "src/common/StandService",
-          "ContactServer": {
-            "$className": "RemoteFunction"
-          }
         }
       }
     },
