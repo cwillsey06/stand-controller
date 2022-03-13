@@ -1,0 +1,31 @@
+{
+  "name": "stand-controller",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "common": {
+        "$path": "src/common",
+        "$ignoreUnknownInstances": true,
+
+        "Packages": {
+          "$path": "Packages"
+        }
+      }
+    },
+
+    "ServerScriptService": {
+      "Server": {
+        "$path": "src/server"
+      }
+    },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Client": {
+          "$path": "src/client"
+        }
+      }
+    }
+  }
+}
