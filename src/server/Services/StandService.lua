@@ -7,9 +7,12 @@ local common = game:GetService("ReplicatedStorage").common
 local Packages = common.Packages
 local Promise = require(Packages.promise)
 local Trove = require(Packages.trove)
-local Tween = require(Packages.tween)
 local Knit = require(Packages.knit)
-local new = require(Packages.new)
+
+local Modules = common.Modules
+local LoadAnimation = require(Modules.loadanimation)
+local Tween = require(Modules.tween)
+local new = require(Modules.new)
 
 
 local StandService = Knit.CreateService {
@@ -42,6 +45,7 @@ function StandService.Client.SetStand(_, player: Player, desiredStand: string)
     local charCF = player.Character:GetPrimaryPartCFrame()
     local offset = CFrame.new(1.5, 1, 1.5)
     stand:SetPrimaryPartCFrame(charCF * offset)
+    LoadAnimation(stand, 9094993059):Play()
 
     local connection
     connection = player.Character.Humanoid.Died:Connect(function() 
