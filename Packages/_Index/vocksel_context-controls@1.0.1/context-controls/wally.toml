@@ -1,0 +1,15 @@
+[package]
+name = "vocksel/context-controls"
+description = "Wrapper around ContextActionService that provides a clean API for creating and binding actions"
+version = "1.0.1"
+authors = [ "David Minnerly <me@vocksel.com>" ]
+license = "MIT"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+exclude = [
+	"*.spec.lua",
+	"**/Mock*"
+]
+
+[dependencies]
+TestEZ = "roblox/testez@0.4.1"
