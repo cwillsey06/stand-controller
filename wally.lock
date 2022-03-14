@@ -5,7 +5,7 @@ registry = "test"
 [[package]]
 name = "cwillsey/stand-controller"
 version = "0.1.0"
-dependencies = [["knit", "sleitnick/knit@1.4.4"], ["promise", "evaera/promise@4.0.0"], ["trove", "sleitnick/trove@0.3.0"]]
+dependencies = [["component", "sleitnick/component@2.4.4"], ["knit", "sleitnick/knit@1.4.4"], ["promise", "evaera/promise@4.0.0"], ["trove", "sleitnick/trove@0.3.0"]]
 
 [[package]]
 name = "evaera/promise"
@@ -23,6 +23,11 @@ version = "0.2.2"
 dependencies = [["Option", "sleitnick/option@1.0.3"], ["Promise", "evaera/promise@3.2.1"], ["Signal", "sleitnick/signal@1.1.0"]]
 
 [[package]]
+name = "sleitnick/component"
+version = "2.4.4"
+dependencies = [["Promise", "evaera/promise@3.2.1"], ["Signal", "sleitnick/signal@1.1.0"], ["Symbol", "sleitnick/symbol@2.0.0"], ["Trove", "sleitnick/trove@0.3.0"]]
+
+[[package]]
 name = "sleitnick/knit"
 version = "1.4.4"
 dependencies = [["Comm", "sleitnick/comm@0.2.2"], ["Promise", "evaera/promise@3.2.1"]]
@@ -35,6 +40,11 @@ dependencies = []
 [[package]]
 name = "sleitnick/signal"
 version = "1.1.0"
+dependencies = []
+
+[[package]]
+name = "sleitnick/symbol"
+version = "2.0.0"
 dependencies = []
 
 [[package]]
