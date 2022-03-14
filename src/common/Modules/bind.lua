@@ -18,10 +18,10 @@ function bind(inputTypes: {Enum.KeyCode | Enum.UserInputType}, callback: () -> (
     self.InputConnection = UserInputService["Input".. (state or "Began")]:Connect(function(obj)
         for _, itype in ipairs(inputTypes) do
             if itype == obj.KeyCode or itype == obj.UserInputType then
-                break
+                callback(obj)
+                return
             end
         end
-        callback(obj)
     end)
 
     return self
