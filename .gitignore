@@ -1,9 +1,6 @@
 # Local TODO File
 /*.todo.txt
 
-# Project place file
-/stand-controller.rbxlx
-
 # Roblox Studio lock files
 /*.rbxlx.lock
 /*.rbxl.lock
