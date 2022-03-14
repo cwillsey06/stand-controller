@@ -26,8 +26,9 @@ local StandService = Knit.CreateService {
 -- Server
 
 function StandService.Attack(player: Player, attackType: string)
-    local stand = Component:FromInstance(StandService.GetStandFromPlayer(player))
+    local stand = StandComponent:FromInstance(StandService.GetStandFromPlayer(player))
     stand:Attack(attackType)
+end
 
 function StandService.SetStand(player: Player, desiredStand: string)
     -- setup

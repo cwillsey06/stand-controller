@@ -16,6 +16,7 @@ local RaycastHitbox = require(Modules.RaycastHitbox)
 local LoadAnimation = require(Modules.loadanimation)
 local Tween = require(Modules.tween)
 
+Knit.OnStart():await()
 local StandService = Knit.GetService("StandService")
 
 local Stand = Component.new { Tag = "PlayerStand" }
