@@ -28,9 +28,6 @@ function StandService.Attack(player: Player, attackType: string)
     if attackType == "Attack1" then
         local anim = LoadAnimation(stand, 9096907964)
         anim:Play()
-        Hitbox:HitStart()
-        anim.Ended:Wait()
-        Hitbox:HitStop()
     end
 end
 
@@ -46,7 +43,7 @@ end
 -- Client
 
 function StandService.Client:Attack(player: Player, attackType: string)
-    return StandService.Attack(self, player, attackType)
+    return StandService.Attack(player, attackType)
 end
 
 function StandService.Client.SetStand(_, player: Player, desiredStand: string)
