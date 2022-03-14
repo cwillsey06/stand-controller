@@ -13,6 +13,8 @@ local Knit = require(Packages.knit)
 local Modules = common.Modules
 local bind = require(Modules.bind)
 
+local ServerStandController
+
 local StandController = Knit.CreateController { Name = "StandController"; }
 
 function StandController.CreateActions()
@@ -28,7 +30,7 @@ function StandController.CreateActions()
 end
 
 function StandController.Start(desiredStand: string)
-    StandController.StandService.SetStand(Player, desiredStand)
+    ServerStandController = StandController.StandService.SetStand(Player, desiredStand)
     StandController.CreateActions()
 end
 
