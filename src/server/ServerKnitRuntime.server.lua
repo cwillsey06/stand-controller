@@ -1,6 +1,5 @@
 local common = game:GetService("ReplicatedStorage").common
 local Packages = common.Packages
-local Component = require(Packages.component)
 local Knit = require(Packages.knit)
 
 function loadModules(src: Instance)
