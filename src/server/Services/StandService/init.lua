@@ -5,6 +5,7 @@
 local common = game:GetService("ReplicatedStorage").common
 
 local Packages = common.Packages
+local Component = require(Packages.component)
 local Promise = require(Packages.promise)
 local Trove = require(Packages.trove)
 local Knit = require(Packages.knit)
@@ -15,6 +16,7 @@ local LoadAnimation = require(Modules.loadanimation)
 local Tween = require(Modules.tween)
 local new = require(Modules.new)
 
+local StandComponent = require(script.Parent.Parent.Components.Stand)
 
 local StandService = Knit.CreateService {
     Name = "StandService";
@@ -24,28 +26,10 @@ local StandService = Knit.CreateService {
 -- Server
 
 function StandService.Attack(player: Player, attackType: string)
-    
-end
+    local stand = Component:FromInstance(StandService.GetStandFromPlayer(player))
+    stand:Attack(attackType)
 
-function StandService.GetStand(desiredStand: string): Model?
-    local Stands = game.ServerStorage.private.Assets.Stands
-    return (Stands:FindFirstChild(desiredStand or "Default") or Stands.Default):Clone()
-end
-
--- Client
-
-function CreateHitbox(player, stand)
-    local hitbox = RaycastHitbox.new(stand)
-    local params = RaycastParams.new()
-    params.FilterDescendantsInstances = {player.Character}
-    params.FilterType = Enum.RaycastFilterType.Blacklist
-    hitbox.RaycastParams = params
-
-    hitbox.Visualizer = true -- DEBUG
-    return hitbox
-end
-
-function StandService.Client.SetStand(_, player: Player, desiredStand: string)
+function StandService.SetStand(player: Player, desiredStand: string)
     -- setup
     local stand = StandService.GetStand(desiredStand)
     stand.Name = "Stand"
@@ -56,14 +40,6 @@ function StandService.Client.SetStand(_, player: Player, desiredStand: string)
         Name = player.Name.."Stand"
     })
     stand.Parent = standFolder
-
-    -- cleanup
-    Trove = Trove.new()
-    Trove:AttachToInstance(standFolder)
-    
-    Trove:Add(player.Character.Humanoid.Died:Connect(function() 
-        standFolder:Destroy()
-    end))
 
     -- weld to character
 
@@ -78,6 +54,36 @@ function StandService.Client.SetStand(_, player: Player, desiredStand: string)
     stand:SetPrimaryPartCFrame(charCF * offset)
     LoadAnimation(stand, 9094993059):Play()
 
+    -- set component tag
+    local CollectionService = game:GetService("CollectionService")
+    CollectionService:AddTag(stand, "PlayerStand")
+end
+
+function StandService.GetStand(desiredStand: string): Model?
+    local Stands = game.ServerStorage.private.Assets.Stands
+    return (Stands:FindFirstChild(desiredStand or "Default") or Stands.Default):Clone()
+end
+
+function StandService.GetPlayerFromStand(stand: Model): Player?
+    local folderName = stand.Parent.Name
+    local playerName = folderName:gsub("Stand", '')
+    return game.Players:FindFirstChild(playerName)
+end
+
+function StandService.GetStandFromPlayer(player: Player): Model?
+    local playerName = player.Name
+    local folderName = playerName.. "Stand"
+    return workspace.PlayerStands:FindFirstChild(folderName)
+end
+
+-- Client
+
+function StandService.Client.Attack(_, player: Player, attackType: string)
+    StandService.Attack(player, attackType)
+end
+
+function StandService.Client.SetStand(_, player: Player, desiredStand: string)
+    StandService.SetStand(player, desiredStand)
 end
 
 -- Knit

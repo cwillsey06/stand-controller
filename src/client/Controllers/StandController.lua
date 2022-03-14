@@ -6,14 +6,11 @@ local Player = game:GetService("Players").LocalPlayer
 local common = game:GetService("ReplicatedStorage").common
 
 local Packages = common.Packages
-local Promise = require(Packages.promise)
 local Trove = require(Packages.trove)
 local Knit = require(Packages.knit)
 
 local Modules = common.Modules
 local bind = require(Modules.bind)
-
-local ServerStandController
 
 local StandController = Knit.CreateController { Name = "StandController"; }
 
@@ -30,7 +27,7 @@ function StandController.CreateActions()
 end
 
 function StandController.Start(desiredStand: string)
-    ServerStandController = StandController.StandService.SetStand(Player, desiredStand)
+    StandController.StandService.SetStand(Player, desiredStand)
     StandController.CreateActions()
 end
 
