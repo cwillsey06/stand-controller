@@ -11,8 +11,9 @@ function loadModules(src: Instance)
 end
 
 Knit.AddServices(script.Parent.Services)
-Knit:Start()
+Knit.Start()
 :andThen(function()
+    print('knit server active')
     loadModules(script.Parent.Components)
 end)
 :catch(warn)

@@ -14,7 +14,7 @@ local Knit = require(Packages.knit)
 local Modules = common.Modules
 local RaycastHitbox = require(Modules.RaycastHitbox)
 local LoadAnimation = require(Modules.loadanimation)
-local Tween = require(Modules.tween)
+local new = require(Modules.new)
 
 Knit.OnStart():await()
 local StandService = Knit.GetService("StandService")
@@ -39,6 +39,18 @@ end
 
 function Stand:DisableHitbox()
     self.Hitbox:HitStop()
+end
+
+function Stand:Weld()
+    new("WeldConstraint", self.Stand.PrimaryPart, {
+        Name = "StandWeld";
+        Part0 = self.Stand.HumanoidRootPart;
+        Part1 = self.Owner.Character.HumanoidRootPart;
+    })
+
+    local charCF = self.Owner.Character:GetPrimaryPartCFrame()
+    local offset = CFrame.new(1.5, 1, 1.5)
+    self.Stand:SetPrimaryPartCFrame(charCF * offset)
 end
 
 function Stand:init()

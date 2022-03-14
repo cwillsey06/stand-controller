@@ -5,15 +5,9 @@
 local common = game:GetService("ReplicatedStorage").common
 
 local Packages = common.Packages
-local Component = require(Packages.component)
-local Promise = require(Packages.promise)
-local Trove = require(Packages.trove)
 local Knit = require(Packages.knit)
 
 local Modules = common.Modules
-local RaycastHitbox = require(Modules.RaycastHitbox)
-local LoadAnimation = require(Modules.loadanimation)
-local Tween = require(Modules.tween)
 local new = require(Modules.new)
 
 local StandComponent = require(script.Parent.Parent.Components.Stand)
@@ -32,7 +26,7 @@ end
 
 function StandService.SetStand(player: Player, desiredStand: string)
     -- setup
-    local stand = StandService.GetStand(desiredStand)
+    local stand = StandService.GetStandModel(desiredStand)
     stand.Name = "Stand"
 
     -- create player folder
@@ -42,59 +36,46 @@ function StandService.SetStand(player: Player, desiredStand: string)
     })
     stand.Parent = standFolder
 
-    -- weld to character
-
-    new("WeldConstraint", stand.PrimaryPart, {
-        Name = "StandWeld";
-        Part0 = stand.HumanoidRootPart;
-        Part1 = player.Character.HumanoidRootPart;
-    })
-
-    local charCF = player.Character:GetPrimaryPartCFrame()
-    local offset = CFrame.new(1.5, 1, 1.5)
-    stand:SetPrimaryPartCFrame(charCF * offset)
-    LoadAnimation(stand, 9094993059):Play()
-
     -- set component tag
     local CollectionService = game:GetService("CollectionService")
     CollectionService:AddTag(stand, "PlayerStand")
 end
 
-function StandService.GetStand(desiredStand: string): Model?
+function StandService.GetStandModel(desiredStand: string): Model?
     local Stands = game.ServerStorage.private.Assets.Stands
     return (Stands:FindFirstChild(desiredStand or "Default") or Stands.Default):Clone()
 end
 
 function StandService.GetPlayerFromStand(stand: Model): Player?
     local folderName = stand.Parent.Name
-    local playerName = folderName:gsub("Stand", '')
+    local playerName = folderName:sub(-#folderName, -6)
     return game.Players:FindFirstChild(playerName)
 end
 
 function StandService.GetStandFromPlayer(player: Player): Model?
     local playerName = player.Name
     local folderName = playerName.. "Stand"
-    return workspace.PlayerStands:FindFirstChild(folderName)
+    return workspace.PlayerStands:FindFirstChild(folderName).Stand
 end
 
 -- Client
 
-function StandService.Client.Attack(_, player: Player, attackType: string)
-    StandService.Attack(player, attackType)
+function StandService.Client.Attack(client: Player, attackType: string)
+    StandService.Attack(client, attackType)
 end
 
-function StandService.Client.SetStand(_, player: Player, desiredStand: string)
-    StandService.SetStand(player, desiredStand)
+
+function StandService.Client.SetStand(client: Player, desiredStand: string)
+    StandService.SetStand(client, desiredStand)
 end
 
 -- Knit
 
 function StandService:KnitInit()
-    
 end
 
 function StandService:KnitStart()
-    
+    print("StandService started")
 end
 
 return StandService

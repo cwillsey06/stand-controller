@@ -17,7 +17,7 @@ local StandController = Knit.CreateController { Name = "StandController"; }
 function StandController.CreateActions()
     local actions = {
         bind({ Enum.UserInputType.MouseButton1; }, function(_inputObject)
-            StandController.StandService.Attack(Player, "Attack1")
+            StandController.StandService.Attack("Attack1")
         end)
     }
     
@@ -27,7 +27,7 @@ function StandController.CreateActions()
 end
 
 function StandController.Start(desiredStand: string)
-    StandController.StandService.SetStand(Player, desiredStand)
+    StandController.StandService.SetStand(desiredStand)
     StandController.CreateActions()
 end
 
