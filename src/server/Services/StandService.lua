@@ -46,11 +46,9 @@ function StandService._ServerInitStand(client: Player, standName: string?)
     
     local standModel = (Stands:FindFirstChild(standName or "Default") or Stands.Default):Clone()
     standModel.Name = "Stand"
-    -- standModel.Parent = standFolder
-    -- TODO: Temporary solution
+    standModel.Parent = standFolder
     task.defer(function()
         for _ = 1, 200 do
-            standModel.Parent = standFolder
             print(standModel:GetFullName())
             task.wait()
         end

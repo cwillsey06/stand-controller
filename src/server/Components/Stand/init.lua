@@ -46,7 +46,6 @@ function Stand:Init()
 end
 
 function Stand.new(standModel: Model)
-    print('stand init')
     local self = setmetatable({}, Stand)
     self._trove = Trove.new()
 
@@ -57,6 +56,10 @@ function Stand.new(standModel: Model)
 
     self:Init()
     return self
+end
+
+function Stand:Start()
+    print("Stand Component started")
 end
 
 function Stand:Destroy()
