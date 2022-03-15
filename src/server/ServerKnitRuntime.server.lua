@@ -4,12 +4,15 @@
 
 local common = game:GetService("ReplicatedStorage").common
 local Packages = common.Packages
+local Component = require(Packages.component)
 local Loader = require(Packages.loader)
 local Knit = require(Packages.knit)
 
 Knit.AddServices(script.Parent.Services)
 Knit.Start()
 :andThen(function()
-    Loader.LoadChildren(common.Components)
+    for _, component in ipairs(Loader.LoadChildren(common.Components)) do
+        Component.new(component)
+    end
 end)
 :catch(warn)
