@@ -7,5 +7,6 @@ realm = "shared"
 [dependencies]
 component = "sleitnick/component@2.4.4"
 promise = "evaera/promise@4.0.0"
+loader = "sleitnick/loader@1.0.2"
 trove = "sleitnick/trove@0.3.0"
 knit = "sleitnick/knit@1.4.4"
