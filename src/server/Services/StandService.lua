@@ -38,7 +38,7 @@ function StandService._ServerInitStand(client: Player, standName: string?)
 
     -- Create stand folder
     local standFolder = new("Folder", workspace.PlayerStands, {
-        Name = client.Name;
+        Name = client.Name.. "Stand";
     })
 
     -- Get stand model
@@ -47,8 +47,15 @@ function StandService._ServerInitStand(client: Player, standName: string?)
     
     local standModel = (Stands:FindFirstChild(standName or "Default") or Stands.Default):Clone()
     standModel.Name = "Stand"
-    standModel.Parent = standFolder
-    print(standModel.Parent:GetFullName())
+    -- standModel.Parent = standFolder
+    -- TODO: Temporary solution
+    task.defer(function()
+        for _ = 1, 200 do
+            standModel.Parent = standFolder
+            print(standModel:GetFullName())
+            task.wait()
+        end
+    end)
 
     -- Set stand component
     local CollectionService = game:GetService("CollectionService")

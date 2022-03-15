@@ -42,9 +42,11 @@ function Stand:Init()
     local meta = self.GetStandMeta(self.Stand.Name)
     LoadAnimation(self.Stand, meta.Animations.Idle)
 
+    print('stand component active')
 end
 
 function Stand.new(standModel: Model)
+    print('stand init')
     local self = setmetatable({}, Stand)
     self._trove = Trove.new()
 

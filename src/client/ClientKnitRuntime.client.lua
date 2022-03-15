@@ -7,11 +7,8 @@ local Packages = common:WaitForChild("Packages")
 local Knit = require(Packages.knit)
 
 Knit.AddControllers(script.Parent.Controllers)
-Knit.Start({ ServicePromises = false; })
-:andThen(function()
-    print("Knit Client Started")
-end)
-:catch(warn):await()
+Knit.Start():catch(warn):await()
 
 Knit.Player.CharacterAdded:Wait()
-Knit.GetController("StandController").Start("Default") -- TODO: add interface for this.
+local StandController = Knit.GetController("StandController")
+StandController.Start("Default") -- TODO: add interface for this.
