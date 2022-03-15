@@ -15,9 +15,7 @@ local Modules = common.Modules
 local LoadAnimation = require(Modules.loadanimation)
 local new = require(Modules.new)
 
-local Stand = {}
-Stand.__index = Stand
-Stand.Tag = "PlayerStand"
+local Stand = Component.new { Tag = "PlayerStand" }
 
 function Stand.GetStandMeta(standName: string): {any}?
     return metadata[standName] or metadata.default

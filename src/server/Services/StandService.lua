@@ -9,7 +9,6 @@
 local common = game:GetService("ReplicatedStorage").common
 
 local Packages = common.Packages
-local Component = require(Packages.component)
 local Trove = require(Packages.trove)
 local Knit = require(Packages.knit)
 
@@ -27,7 +26,7 @@ function StandService._ServerAttack(client: Player, attackMethod: string)
     local stand = StandService.GetStandFromPlayer(client)
     assert(stand, "Stand does not exist!")
 
-    local baseCmpt = require(common.Components.Stand)
+    local baseCmpt = require(script.Parent.Components.Stand)
     local standComponent = baseCmpt:FromInstance(stand)
 
     standComponent:Attack(attackMethod)
